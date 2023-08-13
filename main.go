@@ -10,9 +10,12 @@ import (
 
 func main() {
 	var wg sync.WaitGroup
-	wg.Add(2)
-	go RunServer(&wg, 3000, MuxServerOne())
-	go RunServer(&wg, 8080, MuxServerTwo())
+	numberOfRunningServers := 2
+	port1 := 8080
+	port2 := 8081
+	wg.Add(numberOfRunningServers)
+	go RunServer(&wg, port1, MuxServerOne())
+	go RunServer(&wg, port2, MuxServerTwo())
 	wg.Wait()
 }
 
